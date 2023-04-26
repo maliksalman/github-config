@@ -71,12 +71,23 @@ function tools::install() {
 }
 
 function stack::create() {
-  local secrets
+  local secrets arch stack_config
 
   secrets=("${@}")
 
+  arch=$(util::tools::arch)
+  stack_config="${STACK_DIR}/stack.toml"
+
+  if [[ "$arch" == "arm64" ]]; then
+    stack_config="${STACK_DIR}/stack-arm64.toml"
+  fi
+
+  if [[ ! -f $stack_config ]]; then
+    util::print::error "Stack configuration not found. Expected: \"${stack_config}\""
+  fi
+
   args=(
-      --config "${STACK_DIR}/stack.toml"
+      --config "${stack_config}"
       --build-output "${BUILD_DIR}/build.oci"
       --run-output "${BUILD_DIR}/run.oci"
     )
