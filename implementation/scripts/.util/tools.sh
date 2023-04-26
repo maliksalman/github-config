@@ -96,7 +96,7 @@ function util::tools::jam::install() {
 
     util::print::title "Installing jam ${version}"
 
-    os=$(util::tools:os)
+    os=$(util::tools::os)
     arch=$(util::tools::arch)
 
     curl "https://github.com/paketo-buildpacks/jam/releases/download/${version}/jam-${os}-${arch}" \
@@ -151,7 +151,7 @@ function util::tools::pack::install() {
 
     util::print::title "Installing pack ${version}"
 
-    os=$(util::tools:os macos)
+    os=$(util::tools::os macos)
     arch=$(util::tools::arch --blank-amd64)
 
     curl "https://github.com/buildpacks/pack/releases/download/${version}/pack-${version}-${os}${arch:+-$arch}.tgz" \
